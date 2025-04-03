@@ -24,6 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Container(
       decoration: BoxDecoration(gradient: AppColors.primaryGradient),
       child: Scaffold(
+        // appBar: AppBar(),
         backgroundColor: Colors.transparent,
         body: Center(
           child: SingleChildScrollView(
@@ -183,13 +184,13 @@ class _LoginScreenState extends State<LoginScreen> {
         }
         if (isEmail &&
             !RegExp(
-              r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}\$',
+              r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', // Updated regex for email
             ).hasMatch(value)) {
           return "Enter a valid email";
         }
         if (isPassword &&
             !RegExp(
-              r'^(?=.*[A-Z])(?=.*\d)(?=.*[@\$!%*?&])[A-Za-z\d@\$!%*?&]{8,}\$',
+              r'^(?=.*[A-Z])(?=.*\d)(?=.*[@\$!%*?&])[A-Za-z\d@\$!%*?&]{8,}$', // Updated regex for password
             ).hasMatch(value)) {
           return "Password must be 8+ chars, include 1 uppercase, 1 number & 1 special character";
         }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:glitch_ai/screens/authentication/login_screen.dart';
+import 'package:glitch_ai/screens/authentication/welcome_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Poppins',
       ),
-      home:LoginScreen(),
+      home:WelcomeScreen(),
     );
   }
 }
