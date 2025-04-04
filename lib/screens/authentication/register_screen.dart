@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:glitch_ai/constants/colors.dart';
+import 'package:glitch_ai/screens/image_generator.dart';
 import 'package:iconsax/iconsax.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -83,6 +84,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         // Proceed with registration
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const ImageGenerator()));
                       }
                     },
                   ),
@@ -181,7 +183,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         }
         if (isEmail &&
             !RegExp(
-              r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}\$',
+              r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
             ).hasMatch(value)) {
           return "Enter a valid email";
         }
@@ -190,7 +192,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         }
         if (isPassword &&
             !RegExp(
-              r'^(?=.*[A-Z])(?=.*\d)(?=.*[@\$!%*?&])[A-Za-z\d@\$!%*?&]{8,}\$',
+              r'^(?=.*[A-Z])(?=.*\d)(?=.*[@\$!%*?&])[A-Za-z\d@\$!%*?&]{8,}$',
             ).hasMatch(value)) {
           return "Password must be 8+ chars, include 1 uppercase, 1 number & 1 special character";
         }

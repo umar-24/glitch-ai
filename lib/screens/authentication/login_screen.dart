@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:glitch_ai/constants/colors.dart';
 import 'package:glitch_ai/screens/authentication/register_screen.dart';
+import 'package:glitch_ai/screens/chat_screen.dart';
 import 'package:iconsax/iconsax.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -88,6 +89,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         // Proceed with login
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>  ChatScreen(),
+                          ),
+                        );
                       }
                     },
                   ),

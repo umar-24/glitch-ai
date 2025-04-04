@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:glitch_ai/screens/authentication/welcome_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 

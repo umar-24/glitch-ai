@@ -14,7 +14,7 @@ class AppColors{
 );
 
 
-  static const Color primaryColor = Color(0xFF0B6623); // Deep Green
+  static const Color primaryColor = Color(0xFF004434); // Deep Green
   static const Color secondaryColor = Color(0xFF2E8B57); // Medium Sea Green
   static const Color accentColor = Color(0xFF000000); // Pure Black
   static const Color backgroundColor = Color(0xFFFFFFFF); // White
