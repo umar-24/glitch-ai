@@ -38,6 +38,8 @@ dependencies:
   iconsax: ^0.0.8
   firebase_core: ^3.13.0
   firebase_auth: ^5.5.2
+  lottie: ^3.3.1
+  animate_do: ^4.2.0
   # path_provider: ^2.1.5
   # image_gallery_saver: ^2.0.3
   # fluttertoast: ^8.2.12
@@ -70,6 +72,7 @@ flutter:
   assets:
     - assets/images/
     - assets/logo/
+    - assets/animations/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
