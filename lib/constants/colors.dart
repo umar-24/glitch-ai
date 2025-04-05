@@ -9,8 +9,8 @@ class AppColors{
     Color(0xFF002D1F), // Dark Green Shade
     Color(0xFF004D3C), // Deep Green
   ],
-  begin: Alignment.centerLeft,
-  end: Alignment.centerRight,
+  begin: Alignment.bottomCenter,
+  end: Alignment.topCenter,
 );
 
 

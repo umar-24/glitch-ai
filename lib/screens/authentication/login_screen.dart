@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:glitch_ai/constants/colors.dart';
+import 'package:glitch_ai/screens/authentication/forgot_password.dart';
 import 'package:glitch_ai/screens/authentication/register_screen.dart';
 import 'package:glitch_ai/screens/chat_screen.dart';
 import 'package:iconsax/iconsax.dart';
@@ -73,7 +74,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>  ForgotPasswordScreen(),
+                          ),
+                        );
+                      },
                       child: const Text(
                         "Forgot Password?",
                         style: TextStyle(color: Colors.white),

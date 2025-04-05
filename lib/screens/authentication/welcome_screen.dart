@@ -64,6 +64,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   SizedBox(height: screenHeight * 0.05),
                   CustomElevatedButton(
                     text: "Login",
+                    size: 18,
                     onPressed: () {
                       Navigator.of(context).push(_createRoute(const LoginScreen()));
                     },
@@ -73,6 +74,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   SizedBox(height: screenHeight * 0.02),
                   CustomElevatedButton(
                     text: "Register",
+                    size: 18,
                     onPressed: () {
                       Navigator.of(context).push(_createRoute(const RegisterScreen()));
                     },

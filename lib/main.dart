@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:glitch_ai/screens/authentication/welcome_screen.dart';
+import 'package:glitch_ai/provider/splash_screen_provider.dart';
+import 'package:glitch_ai/screens/home_screen.dart';
+import 'package:glitch_ai/screens/splash_screen.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,12 +14,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: 'Poppins',
+    return MultiProvider(
+      providers: [
+        // Add your providers here
+        ChangeNotifierProvider(create: (_) => SplashProvider()), // Example
+        // You can add other providers as needed, e.g.,
+        // ChangeNotifierProvider(create: (_) => AnotherProvider()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          fontFamily: 'Poppins',
+        ),
+        home: SplashScreen (),
       ),
-      home:WelcomeScreen(),
     );
   }
 }
