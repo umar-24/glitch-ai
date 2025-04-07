@@ -1,12 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:glitch_ai/constants/colors.dart';
 import 'package:glitch_ai/screens/authentication/forgot_password.dart';
 import 'package:glitch_ai/screens/authentication/register_screen.dart';
 import 'package:glitch_ai/screens/chat_screen.dart';
+import 'package:glitch_ai/services/auth_service.dart';
+import 'package:glitch_ai/utils/toast_message.dart';
 import 'package:iconsax/iconsax.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  final VoidCallback? onPressed;
+  const LoginScreen({super.key, this.onPressed});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -15,8 +19,28 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   final _formKey = GlobalKey<FormState>();
   bool _isPasswordVisible = false;
+
+  void login() {
+    _auth
+        .signInWithEmailAndPassword(
+          email: _emailController.text.toString(),
+          password: _passwordController.text.toString(),
+        )
+        .then((value) {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => ChatScreen()),
+            (route) => false,
+          );
+          Toasts().toastMessages("SignIn Sucessful");
+        })
+        .onError((error, StackTrace) {
+          Toasts().toastMessagesAlert(error.toString());
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>  ForgotPasswordScreen(),
+                            builder: (context) => ForgotPasswordScreen(),
                           ),
                         );
                       },
@@ -97,12 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         // Proceed with login
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>  ChatScreen(),
-                          ),
-                        );
+                        login();
                       }
                     },
                   ),
@@ -116,7 +135,21 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 20,
                       width: 20,
                     ),
-                    onPressed: () {},
+                    onPressed: () async {
+                      final userCredential =
+                          await AuthService().signInWithGoogle();
+
+                      if (userCredential == null) {
+                        // Handle sign-in failure (e.g., show an error message)
+                        print('Google sign-in failed or was canceled');
+                      } else {
+                        // Sign-in successful, navigate to BottomNavBarPage
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => ChatScreen()),
+                        );
+                      }
+                    },
                     color: AppColors.white,
                     borderColor: AppColors.white,
                     textColor: AppColors.black,
@@ -130,8 +163,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: TextStyle(color: Colors.white),
                       ),
                       TextButton(
+                        // onPressed: widget.onPressed, // Toggle to RegisterScreen
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterScreen()));
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => RegisterScreen()));
                         },
                         child: const Text(
                           "Register",
@@ -167,22 +201,19 @@ class _LoginScreenState extends State<LoginScreen> {
         filled: true,
         fillColor: Colors.white,
         prefixIcon: Icon(icon, color: Colors.black54),
-        suffixIcon:
-            isPassword
-                ? IconButton(
-                  icon: Icon(
-                    _isPasswordVisible
-                        ? Iconsax.eye
-                        : Iconsax.eye_slash,
-                    color: Colors.black54,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      _isPasswordVisible = !_isPasswordVisible;
-                    });
-                  },
-                )
-                : null,
+        suffixIcon: isPassword
+            ? IconButton(
+                icon: Icon(
+                  _isPasswordVisible ? Iconsax.eye : Iconsax.eye_slash,
+                  color: Colors.black54,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _isPasswordVisible = !_isPasswordVisible;
+                  });
+                },
+              )
+            : null,
         hintText: hintText,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
@@ -239,8 +270,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           onPressed: onPressed,
-          icon:
-              icon ?? const SizedBox(),
+          icon: icon ?? const SizedBox(),
           label: Text(
             text,
             style: TextStyle(color: textColor ?? AppColors.white, fontSize: 16),

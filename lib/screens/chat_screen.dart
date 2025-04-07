@@ -1,3 +1,5 @@
+// First correct version
+
 // // ignore_for_file: use_key_in_widget_constructors, library_private_types_in_public_api
 
 // import 'package:flutter/material.dart';
@@ -471,7 +473,7 @@
 
 
 
-
+// Second correct version with chat memory
 
 
 import 'package:flutter/material.dart';
@@ -482,7 +484,6 @@ import 'package:glitch_ai/widgets/my_drawer.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:iconsax/iconsax.dart';
-import 'package:lottie/lottie.dart';
 import 'package:flutter/services.dart'; // for Clipboard
 
 class ChatScreen extends StatefulWidget {
@@ -618,7 +619,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Lottie.asset("assets/animations/bot_welcome.json"),
+                          Image.asset(AppImages.logo, width: 150, height: 150, color: Colors.white),
                           SizedBox(height: 20),
                           Text(
                             "Hello! this is Glitch AI",

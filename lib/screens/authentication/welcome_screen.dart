@@ -66,7 +66,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     text: "Login",
                     size: 18,
                     onPressed: () {
-                      Navigator.of(context).push(_createRoute(const LoginScreen()));
+                      Navigator.of(context).pushReplacement(_createRoute(const LoginScreen()));
                     },
                     color: Colors.white,
                     textColor: Colors.black,
@@ -76,7 +76,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     text: "Register",
                     size: 18,
                     onPressed: () {
-                      Navigator.of(context).push(_createRoute(const RegisterScreen()));
+                      Navigator.of(context).pushReplacement(_createRoute(const RegisterScreen()));
                     },
                     color: Colors.white,
                     textColor: Colors.black,
